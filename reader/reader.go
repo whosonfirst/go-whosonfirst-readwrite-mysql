@@ -72,7 +72,7 @@ func (r *MySQLReader) Read(path string) (io.ReadCloser, error) {
 		return nil, err
 	}
 
-	q := fmt.Sprintf("SELECT ST_AsGeoJSON, JSON_UNQUOTE(properties) FROM %s WHERE id=?", r.table.Name())
+	q := fmt.Sprintf("SELECT ST_AsGeoJSON(geometry), JSON_UNQUOTE(properties) FROM %s WHERE id=?", r.table.Name())
 	row := conn.QueryRow(q, id)
 
 	var str_geom string
