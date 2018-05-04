@@ -8,9 +8,9 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-mysql/database"
 	"github.com/whosonfirst/go-whosonfirst-mysql/tables"
 	"github.com/whosonfirst/go-whosonfirst-mysql/utils"
+	reader_utils "github.com/whosonfirst/go-whosonfirst-readwrite-mysql/utils"
 	"github.com/whosonfirst/go-whosonfirst-readwrite/bytes"
 	wof_reader "github.com/whosonfirst/go-whosonfirst-readwrite/reader"
-	reader_utils "github.com/whosonfirst/go-whosonfirst-readwrite-mysql/utils"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 	"io"
 )

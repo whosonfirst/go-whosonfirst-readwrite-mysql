@@ -37,4 +37,5 @@ fmt:
 	go fmt cmd/*.go
 
 bin: 	self
+	rm -rf bin/*
 	GOPATH=$(GOPATH) go build -o bin/wof-mysql-readerd cmd/wof-mysql-readerd.go
