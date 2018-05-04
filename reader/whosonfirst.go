@@ -14,7 +14,7 @@ import (
 	"io"
 )
 
-type MySQLReader struct {
+type MySQLWhosonfirstReader struct {
 	wof_reader.Reader
 	database *database.MySQLDatabase
 	table    mysql.Table
@@ -26,7 +26,7 @@ type Feature struct {
 	Properties interface{} `json:"properties"`
 }
 
-func NewMySQLReader(dsn string, args ...interface{}) (wof_reader.Reader, error) {
+func NewMySQLWhosonfirstReader(dsn string, args ...interface{}) (wof_reader.Reader, error) {
 
 	db, err := database.NewDB(dsn)
 
@@ -50,7 +50,7 @@ func NewMySQLReader(dsn string, args ...interface{}) (wof_reader.Reader, error) 
 		return nil, errors.New(fmt.Sprintf("Database is missing %s table", tbl.Name()))
 	}
 
-	r := MySQLReader{
+	r := MySQLWhosonfirstReader{
 		database: db,
 		table:    tbl,
 	}
@@ -58,7 +58,7 @@ func NewMySQLReader(dsn string, args ...interface{}) (wof_reader.Reader, error) 
 	return &r, nil
 }
 
-func (r *MySQLReader) Read(path string) (io.ReadCloser, error) {
+func (r *MySQLWhosonfirstReader) Read(path string) (io.ReadCloser, error) {
 
 	id, err := uri.IdFromPath(path)
 
@@ -114,6 +114,6 @@ func (r *MySQLReader) Read(path string) (io.ReadCloser, error) {
 	return bytes.ReadCloserFromBytes(body)
 }
 
-func (r *MySQLReader) URI(path string) string {
+func (r *MySQLWhosonfirstReader) URI(path string) string {
 	return fmt.Sprintf("mysql://%s/%s#%s", r.database.DSN(), r.table.Name(), path)
 }

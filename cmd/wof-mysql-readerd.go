@@ -3,26 +3,45 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/whosonfirst/go-whosonfirst-readwrite/http"	
-	"github.com/whosonfirst/go-whosonfirst-readwrite-mysql/reader"
+	mysql_reader "github.com/whosonfirst/go-whosonfirst-readwrite-mysql/reader"
+	"github.com/whosonfirst/go-whosonfirst-readwrite/http"
+	"github.com/whosonfirst/go-whosonfirst-readwrite/reader"
 	"log"
-	"os"
 	gohttp "net/http"
+	"os"
 )
 
 func main() {
 
 	var host = flag.String("host", "localhost", "The hostname to listen for requests on")
 	var port = flag.Int("port", 8080, "The port number to listen for requests on")
+	var table = flag.String("table", "geojson", "The name of the MySQL table to query")
 
 	var dsn = flag.String("dsn", "", "")
 
 	flag.Parse()
 
-	r, err := reader.NewMySQLReader(*dsn)
+	var r reader.Reader
 
-	if err != nil {
-		log.Fatal(err)
+	if *table == "geojson" {
+
+		gr, err := mysql_reader.NewMySQLGeoJSONReader(*dsn)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		r = gr
+	} else {
+
+		wr, err := mysql_reader.NewMySQLWhosonfirstReader(*dsn)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		r = wr
+
 	}
 
 	read_handler, err := http.ReadHandler(r)

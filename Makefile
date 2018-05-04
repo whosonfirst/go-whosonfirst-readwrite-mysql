@@ -32,6 +32,7 @@ vendor-deps: rmdeps deps
 fmt:
 	go fmt reader/*.go
 	go fmt writer/*.go
+	go fmt cmd/*.go
 
 bin: 	self
 	GOPATH=$(GOPATH) go build -o bin/wof-mysql-readerd cmd/wof-mysql-readerd.go
