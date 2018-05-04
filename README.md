@@ -1,6 +1,6 @@
 # go-whosonfirst-readwrite-mysql
 
-This package assumes two things:
+This package assumes a few things:
 
 1. You are using MySQL 5.7 or higher
 2. You have indexed a `whosonfirst` or `geojson` table (or both) using the [go-whosonfirst-mysql](https://github.com/whosonfirst/go-whosonfirst-mysql) package (or equivalent code)
