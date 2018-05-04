@@ -10,6 +10,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-mysql/utils"
 	"github.com/whosonfirst/go-whosonfirst-readwrite/bytes"
 	wof_reader "github.com/whosonfirst/go-whosonfirst-readwrite/reader"
+	reader_utils "github.com/whosonfirst/go-whosonfirst-readwrite-mysql/utils"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 	"io"
 )
@@ -115,5 +116,5 @@ func (r *MySQLWhosonfirstReader) Read(path string) (io.ReadCloser, error) {
 }
 
 func (r *MySQLWhosonfirstReader) URI(path string) string {
-	return fmt.Sprintf("mysql://%s/%s#%s", r.database.DSN(), r.table.Name(), path)
+	return fmt.Sprintf("mysql://%s/%s#%s", reader_utils.ScrubDSN(r.database.DSN()), r.table.Name(), path)
 }

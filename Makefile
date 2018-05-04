@@ -9,6 +9,7 @@ self:   prep rmdeps
 	mkdir -p src/github.com/whosonfirst/go-whosonfirst-readwrite-mysql
 	cp -r reader src/github.com/whosonfirst/go-whosonfirst-readwrite-mysql/
 	cp -r writer src/github.com/whosonfirst/go-whosonfirst-readwrite-mysql/
+	cp -r utils src/github.com/whosonfirst/go-whosonfirst-readwrite-mysql/
 	cp -r vendor/* src/
 
 rmdeps:
@@ -32,6 +33,7 @@ vendor-deps: rmdeps deps
 fmt:
 	go fmt reader/*.go
 	go fmt writer/*.go
+	go fmt utils/*.go
 	go fmt cmd/*.go
 
 bin: 	self
